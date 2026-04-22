@@ -3,7 +3,13 @@ import axios from 'axios';
 
 const AuthContext = createContext(null);
 
-export const API = axios.create({ baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000' });
+// 🔍 DEBUG TOOL: This will print the URL your live site is using in the browser console (F12)
+console.log("Stitchify API Base URL:", process.env.REACT_APP_API_URL || 'http://localhost:5000');
+
+export const API = axios.create({ 
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000' 
+});
+
 API.interceptors.request.use(cfg => {
   const t = localStorage.getItem('stitch_token');
   if (t) cfg.headers.Authorization = `Bearer ${t}`;
